@@ -153,6 +153,31 @@ def chat():
 def register():
     return render_template('form.html')
 
+@app.route('/add_user', methods=['POST'])
+def add_user():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    password = generate_password_hash(request.form.get('password'))
+    roll_or_id = request.form.get('roll_or_id')
+    user_type = request.form.get('user_type') # Student, Staff, or Faculty
+
+    table_map = {"Student": "students", "Staff": "staff", "Faculty": "faculty"}
+    target_table = table_map.get(user_type)
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        query = f"INSERT INTO {target_table} (name, email, password, roll_or_id) VALUES (%s, %s, %s, %s)"
+        cursor.execute(query, (name, email, password, roll_or_id))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        flash("Registration Successful! Please Login.", "success")
+        return redirect(url_for('index'))
+    except Exception as e:
+        flash(f"Registration Error: {e}", "error")
+        return redirect(url_for('register'))
+
 @app.route('/login_validation', methods=['POST'])
 def login_validation():
     email = request.form.get('email', '').strip()
