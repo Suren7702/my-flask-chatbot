@@ -28,14 +28,13 @@ firebase_config = {
 
 # --- Database Connection Logic ---
 def get_db_connection():
-    # Aiven MySQL requires SSL to be handled carefully
     return mysql.connector.connect(
         host=os.environ.get('DB_HOST', 'mysql-2987be86-my-flask-chatbot.f.aivencloud.com'),
         port=os.environ.get('DB_PORT', '16405'),
         user=os.environ.get('DB_USER', 'avnadmin'),
-        password=os.environ.get('DB_PASSWORD'), # Render Env Variable-la irunthu edukkum
+        password=os.environ.get('DB_PASSWORD'), 
         database=os.environ.get('DB_NAME', 'defaultdb'),
-        ssl_disabled=False 
+        ssl_disabled=False # Ithu Aiven SSL logic-ku help pannum
     )
 
 def create_tables_on_startup():
