@@ -25,24 +25,33 @@ firebase_config = {
     "messagingSenderId": "459493321741",
     "appId": "1:459493321741:web:3b2ec7ea6a9ecbf952f944"
 }
-
-
+# --- Database Connection with Table Creation Logic ---
 def get_db_connection():
     return mysql.connector.connect(
         host=os.environ.get('DB_HOST', 'mysql-2987be86-my-flask-chatbot.f.aivencloud.com'),
         port=os.environ.get('DB_PORT', '16405'),
         user=os.environ.get('DB_USER', 'avnadmin'),
-        password=os.environ.get('DB_PASSWORD'), # Inga Aiven password podu
+        password=os.environ.get('DB_PASSWORD'), 
         database=os.environ.get('DB_NAME', 'defaultdb'),
-        ssl_disabled=False # Aiven requires SSL usually
+        ssl_disabled=False
     )
-# app.py-la connection-ku kila ithai podu
-def create_tables():
+
+def create_tables_on_startup():
+    """App start aagum pothu tables illana auto-va create pannum."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Students Table
+        # Staff table
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS staff (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                email VARCHAR(100) NOT NULL UNIQUE,
+                password VARCHAR(255) NOT NULL
+            )
+        """)
+        
+        # Students table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS students (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,9 +64,9 @@ def create_tables():
             )
         """)
         
-        # Staff Table
+        # Faculty table
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS staff (
+            CREATE TABLE IF NOT EXISTS faculty (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 email VARCHAR(100) NOT NULL UNIQUE,
                 password VARCHAR(255) NOT NULL
@@ -67,12 +76,12 @@ def create_tables():
         conn.commit()
         cursor.close()
         conn.close()
-        print("Tables checked/created successfully!")
+        print("✅ Live Database Tables checked/created successfully!")
     except Exception as e:
-        print(f"Error creating tables: {e}")
+        print(f"❌ Error creating tables: {e}")
 
-# App start aagum pothu ithai call pannu
-create_tables()
+# IMPORTANT: Start command-ku munnadi table creation-ah run pannu
+create_tables_on_startup()
 STOP_WORDS = {"is", "the", "a", "an", "please", "can", "you", "tell", "me", "what", "of", "about"}
 
 # --- 2. Initializations ---
