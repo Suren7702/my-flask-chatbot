@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Enrollment | Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+</head>
+<body>
+    <div class="registration-container">
+        <div class="form-header">
+            <i class="fas fa-user-graduate fa-3x" style="color: #002147; margin-bottom: 10px;"></i>
+            <h1>Enrollment</h1>
+            
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-message {{ 'flash-success' if 'Success' in messages[0] else 'flash-error' }}">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="/submit" method="POST">
+            <div class="form-group">
+                <label for="user_type">Account Type:</label>
+                <select id="user_type" name="user_type" required>
+                    <option value="" disabled selected>-- Select One --</option>
+                    <option value="Student">Student Portal</option>
+                    <option value="Staff">Staff Portal</option>
+                    <option value="Faculty">Faculty Portal</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="roll_or_id">Institutional ID / Roll No:</label>
+                <input type="text" id="roll_or_id" name="roll_or_id" placeholder="Enter ID provided by admin" required>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex: 2;">
+                    <label for="name">Legal Full Name:</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" placeholder="00" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="department_or_class">Academic Department / Class:</label>
+                <input type="text" id="department_or_class" name="department_or_class" placeholder="e.g. BCA, CSE, Admissions" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="name@university.edu" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Min. 8 characters" required>
+                <span class="toggle-password" onclick="togglePasswordVisibility()"><i class="fas fa-eye"></i></span>
+            </div>
+
+            <button type="submit" class="submit-btn">Register Account</button>
+        </form>
+        
+        <div class="back-to-login">
+            Already registered? <a href="{{ url_for('index') }}">Sign in to Portal</a>
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password i');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>

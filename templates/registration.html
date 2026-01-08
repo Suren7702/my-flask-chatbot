@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Enrollment | Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Student Enrollment</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-msg" style="background: {{ '#f8d7da' if category == 'error' else '#d4edda' }}; color: {{ '#721c24' if category == 'error' else '#155724' }};">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="/submit" method="POST">
+            <div class="form-group">
+                <label for="user_type">Enrollment Type</label>
+                <select id="user_type" name="user_type" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Student">Student</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Faculty">Faculty</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="roll_or_id">ID / Roll Number</label>
+                <input type="number" id="roll_or_id" name="roll_or_id" required placeholder="Enter your ID">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter full name">
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex: 1;">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" required>
+                </div>
+                <div class="form-group" style="flex: 2;">
+                    <label for="department_or_class">Dept / Class</label>
+                    <input type="text" id="department_or_class" name="department_or_class" required placeholder="e.g. BCA, CSE">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Institutional Email</label>
+                <input type="email" id="email" name="email" required placeholder="email@univ.edu">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Create a password">
+            </div>
+
+            <button type="submit" class="btn">Complete Registration</button>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a href="/">Login here</a>
+        </div>
+    </div>
+</body>
+</html>

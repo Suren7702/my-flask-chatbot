@@ -1,0 +1,105 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hey", "Hello", "Good day", "Hi there", "Dei"],
+      "responses": [
+        "Hello! How can I help you today?",
+        "Good to see you! What info do you need about our college?",
+        "Hi! I'm your college assistant. How can I help?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye", "Ok bye"],
+      "responses": [
+        "See you later! Have a great day.",
+        "Goodbye! Feel free to ask more questions anytime.",
+        "Bye! Happy learning!"
+      ]
+    },
+    {
+      "tag": "admission",
+      "patterns": [
+        "How to get admission?",
+        "Admission process",
+        "When is admission starting?",
+        "How to apply for college?"
+      ],
+      "responses": [
+        "Admissions usually start in May. You can apply through our official website portal.",
+        "The admission process involves filling out the online form, followed by document verification.",
+        "You can find the admission application under the 'Admissions' tab on our college website."
+      ]
+    },
+    {
+      "tag": "courses",
+      "patterns": [
+        "What courses are available?",
+        "List of departments",
+        "What are the branches?",
+        "Available degrees"
+      ],
+      "responses": [
+        "We offer BCA, B.Sc Computer Science, B.Com, and Engineering in various branches like CSE, ECE, and IT.",
+        "Our departments include Computer Applications, Science, Commerce, and Engineering.",
+        "You can choose from UG and PG courses across multiple streams."
+      ]
+    },
+    {
+      "tag": "fees",
+      "patterns": [
+        "What is the fee structure?",
+        "Fees for BCA",
+        "How much is the semester fee?",
+        "College fees"
+      ],
+      "responses": [
+        "Fee structures vary by department. Generally, it ranges from 30k to 80k per semester.",
+        "Please visit the accounts office or check the fee circular on the notice board for specific details.",
+        "Semester fees can be paid online via the student portal."
+      ]
+    },
+    {
+      "tag": "placement",
+      "patterns": [
+        "How are the placements?",
+        "Which companies visit?",
+        "Placement record",
+        "Job opportunities"
+      ],
+      "responses": [
+        "Our college has an excellent placement record with top companies like TCS, Infosys, and Wipro visiting every year.",
+        "Last year, over 90% of students were placed in reputed firms with good packages.",
+        "The Placement Cell provides training in soft skills and aptitude to help students get hired."
+      ]
+    },
+    {
+      "tag": "canteen",
+      "patterns": [
+        "Does the college have a canteen?",
+        "Food in college",
+        "Is there a mess?",
+        "Canteen timing"
+      ],
+      "responses": [
+        "Yes, we have a spacious canteen offering a variety of healthy breakfast and lunch options.",
+        "The canteen is open from 8:30 AM to 4:30 PM.",
+        "We have both veg and non-veg options available in the college mess."
+      ]
+    },
+    {
+      "tag": "library",
+      "patterns": [
+        "Where is the library?",
+        "Library timings",
+        "How to borrow books?",
+        "Digital library"
+      ],
+      "responses": [
+        "The central library is located in the Main Block, 2nd floor.",
+        "The library is open from 9:00 AM to 6:00 PM on all working days."
+      ]
+    }
+  ]
+}

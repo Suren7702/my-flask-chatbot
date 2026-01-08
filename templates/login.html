@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Portal | Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="form-header">
+            <i class="fas fa-university fa-3x" style="color: #002147;"></i>
+            <h2>Chatbot Portal</h2>
+            <p>Please sign in to continue</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-message" style="background-color: {{ '#f8d7da' if category == 'error' else '#d4edda' }}; color: {{ '#721c24' if category == 'error' else '#155724' }};">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="/login_validation" method="POST">
+            <div class="input-box">
+                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" name="email" id="email" placeholder="e.g. student@univ.edu" required>
+            </div>
+
+            <div class="input-box">
+                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" name="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <div class="input-box">
+                <label for="user_type"><i class="fas fa-user-tag"></i> Type</label>
+                <select id="user_type" name="user_type" required>
+                    <option value="" disabled selected>Select Login Type</option>
+                    <option value="Student">Student </option>
+                    <option value="Staff">Staff </option>
+                    <option value="Faculty">Faculty </option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">SIGN IN</button>
+        </form>
+
+        <div class="form-links">
+            <a href="/forgot_password">Forgot Password?</a>
+            <span style="color: #ccc;">|</span>
+            <a href="/register" style="font-weight: bold;">New Student? Register</a>
+        </div>
+    </div>
+</body>
+</html>

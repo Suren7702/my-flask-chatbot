@@ -1,0 +1,1 @@
+f"Name: {result['name']}<br> Age: {result['age']}<br>  Class: {result['class']}<br>"
