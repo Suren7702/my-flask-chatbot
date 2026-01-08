@@ -32,7 +32,7 @@ def get_db_connection():
         host=os.environ.get('DB_HOST', 'mysql-2987be86-my-flask-chatbot.f.aivencloud.com'),
         port=os.environ.get('DB_PORT', '16405'),
         user=os.environ.get('DB_USER', 'avnadmin'),
-        password=os.environ.get('DB_PASSWORD', 'AVNS_x6TxPLEDV1fg320VVrY'), # Inga Aiven password podu
+        password=os.environ.get('DB_PASSWORD'), # Inga Aiven password podu
         database=os.environ.get('DB_NAME', 'defaultdb'),
         ssl_disabled=False # Aiven requires SSL usually
     )
